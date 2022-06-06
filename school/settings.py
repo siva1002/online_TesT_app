@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ys=$6p&-m31&hd-lj-%d)#!&vo5_4zvp$8t1ss^qe#nujkik&u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'venzoschool.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'school.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME':'school',
-       'USER': 'siva',
-       'PASSWORD': 'root',
-       'HOST': 'localhost',
+       'NAME':'daf6c1o7uvanne',
+       'USER': 'bsxwncbesdpqrb',
+       'PASSWORD': '21deff36f17925c5cc36afc31fd5570f687700981fb791545a89f39f47fb2b39',
+       'HOST': 'ec2-52-44-13-158.compute-1.amazonaws.com',
        'PORT': '5432',
    }
 }
