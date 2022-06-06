@@ -1,7 +1,6 @@
 import email
 from urllib import response
 from django.shortcuts import render
-from psutil import users
 from.models import User,Profile
 from .serializers import SigninSerializer,SignupSerializer,AdminSerializer
 from rest_framework.response import Response
