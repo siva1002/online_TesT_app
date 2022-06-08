@@ -1,4 +1,4 @@
-amount=int(input('enter the number'))
+amount=int(input('enter the numbers'))
 notes=[500,200,100]
 count=[0,0,0]
 notes_in_hand=0
