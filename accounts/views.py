@@ -11,7 +11,7 @@ from.models import User,Profile
 from.serializers import SigninSerializer, SignupSerializer,ProfileSerializer,UserDetailsSerializer
 from .permission import IsAdminUser,IsStaffUser
 from .auth_backend import PasswordlessAuthBackend
-
+from.helper import OtpGeneration
 # Create your views here.
 
 
@@ -22,6 +22,7 @@ class SignupView(CreateAPIView):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            OtpGeneration.generate_otp(serializer.phone)
             return Response({"status": "success"},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors})
 

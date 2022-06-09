@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, redirect
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import send_mail
@@ -17,7 +17,8 @@ User = get_user_model()
 usertype_choice={
     ('is_student','is_student'),
     ('is_staff','is_staff'),
-    ('is_admin','is_admin')
+    ('is_admin','is_admin'),
+     ('is_data_entry','is_data_entry')
 }
 
 class SignupSerializer(serializers.Serializer):
@@ -49,15 +50,13 @@ class SignupSerializer(serializers.Serializer):
         section = validated_data.pop("section")
         address = validated_data.pop("address")
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,register_number=register_number,user_type = user_type)
-        user.save()
+        user.save(commit=False)
         # subject = 'welcome to myapp'
         # message = f'Hi {user.username}, thank you for registering in our new app'
         # email_from = settings.EMAIL_HOST_USER
         # recipient_list = [user.email,]
         # send_mail(subject,message,email_from,recipient_list)
         Profile.objects.create(user=user,first_name=first_name,last_name=last_name,standard=standard,section=section,address=address, full_name=full_name)
-        return user
-
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
