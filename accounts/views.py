@@ -25,8 +25,6 @@ class SignupView(CreateAPIView):
             OtpGeneration.generate_otp(serializer.phone)
             return Response({"status": "success"},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors})
-
-
 class LoginView(APIView):
     serializer_class=SigninSerializer
     def post(self,request):

@@ -18,7 +18,6 @@ usertype_choice={
     ('is_student','is_student'),
     ('is_staff','is_staff'),
     ('is_admin','is_admin'),
-     ('is_data_entry','is_data_entry')
 }
 
 class SignupSerializer(serializers.Serializer):
@@ -30,12 +29,14 @@ class SignupSerializer(serializers.Serializer):
         choices = usertype_choice,
         default='0'
     )
+    
     first_name = serializers.CharField(max_length=15)
     last_name = serializers.CharField(max_length=15)
     full_name =serializers.CharField(max_length=30)
     standard = serializers.IntegerField()
     section = serializers.CharField(max_length=2)
     address = serializers.CharField(max_length=45)
+    is_data_entry = serializers.BooleanField()      
 
     def create(self, validated_data):
         email = validated_data.pop("email")
@@ -44,12 +45,13 @@ class SignupSerializer(serializers.Serializer):
         date_of_birth = validated_data.pop("date_of_birth")
         user_type = validated_data.pop("user_type")
         first_name = validated_data.pop("first_name")
-        last_name = validated_data.pop("last_name")        
+        last_name = validated_data.pop("last_name")         
         full_name = validated_data.pop("full_name")
         standard = validated_data.pop("standard")
         section = validated_data.pop("section")
         address = validated_data.pop("address")
-        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,register_number=register_number,user_type = user_type)
+        is_data_entry =  validated_data.pop("is_data_entry")      
+        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
         user.save(commit=False)
         # subject = 'welcome to myapp'
         # message = f'Hi {user.username}, thank you for registering in our new app'
