@@ -3,17 +3,8 @@ from django.shortcuts import get_list_or_404, redirect
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import send_mail
-from .models import Profile
-
-
+from .models import OTP, Profile
 User = get_user_model()
-
-
-# class User_type(enum.Enum):
-#    is_student = "is_student"
-#    is_staff = "is_staff"
-#    is_admin = "is_admin"
-
 usertype_choice={
     ('is_student','is_student'),
     ('is_staff','is_staff'),
@@ -37,7 +28,6 @@ class SignupSerializer(serializers.Serializer):
     section = serializers.CharField(max_length=2)
     address = serializers.CharField(max_length=45)
     is_data_entry = serializers.BooleanField()      
-
     def create(self, validated_data):
         email = validated_data.pop("email")
         phone = validated_data.pop("phone")
@@ -52,7 +42,7 @@ class SignupSerializer(serializers.Serializer):
         address = validated_data.pop("address")
         is_data_entry =  validated_data.pop("is_data_entry")      
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
-        user.save(commit=False)
+        user.save()
         # subject = 'welcome to myapp'
         # message = f'Hi {user.username}, thank you for registering in our new app'
         # email_from = settings.EMAIL_HOST_USER
@@ -63,14 +53,10 @@ class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email','phone']
-
-
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['first_name','last_name','full_name',"standard","section","address"]
-
-
 class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
@@ -114,3 +100,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         profile.save()
 
         return instance
+class OtpVerificationserializer(serializers.ModelSerializer):
+    class Meta:
+        model=OTP
+        fields=['otp']

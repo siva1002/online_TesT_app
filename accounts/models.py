@@ -1,3 +1,4 @@
+from ast import Mod
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
@@ -68,7 +69,7 @@ class User(AbstractBaseUser):
     )
     created_at = models.DateTimeField(default=timezone.now)
     objects = MyUserManager()
-
+    is_data_entry=models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone']
 
@@ -103,3 +104,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+class OTP(models.Model):
+    email = models.EmailField()
+    phone = models.CharField(
+        default= 1234567890,
+        max_length= 10,
+        validators=[
+            MinLengthValidator(10)
+        ])
+    otp=models.CharField(max_length=6)

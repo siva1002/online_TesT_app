@@ -81,31 +81,37 @@ TEMPLATES = [
 WSGI_APPLICATION = 'schoolproject.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+# Database={
+# 'https://docs.djangoproject.com/en/3.2/ref/settings/databases'
 # }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbkpeg3j8s9tgc',
-        'USER': 'qyirzricdqofxz',
-        'PASSWORD': 'ded3e8beabdce8051efa945df3ad28041d3041e83bfb8207ca1b861e28dfcdb1',
-        'HOST': 'ec2-3-231-82-226.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dbkpeg3j8s9tgc',
+#         'USER': 'qyirzricdqofxz',
+#         'PASSWORD': 'ded3e8beabdce8051efa945df3ad28041d3041e83bfb8207ca1b861e28dfcdb1',
+#         'HOST': 'ec2-3-231-82-226.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME':'school',
+#        'USER': 'siva',
+#        'PASSWORD': 'root',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+# }
 
 REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': (

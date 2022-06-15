@@ -6,5 +6,7 @@ urlpatterns=[
     path('subjects/<int:pk>/',SubjectEditView.as_view()),
     path('chapters/',ChaptersView.as_view()),
     path('chapter/<int:pk>/',ChapterEditView.as_view()),
-    path('',ChaptersOfSubjectsView.as_view())
+    path('',ChaptersOfSubjectsView.as_view()),
+    path('question/',QuestionAddView.as_view()),
+    path('questionsap/',QuestionsView.as_view())
 ]
